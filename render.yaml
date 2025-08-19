@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: hshop-abandoned-cart
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: SENDPULSE_ID
+        sync: false
+      - key: SENDPULSE_SECRET
+        sync: false
