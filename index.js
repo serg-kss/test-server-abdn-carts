@@ -22,8 +22,8 @@ async function getToken() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       grant_type: "client_credentials",
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
+      client_id: "2f20735d0a318d01f312cf46fab6a1a2",
+      client_secret: "a9e48263667d3662bb5bde9af83bf10b",
     }),
   });
 
@@ -45,7 +45,8 @@ app.post("/cart-abandoned", async (req, res) => {
     const token = await getToken();
 
     // Отправляем событие в SendPulse
-    await fetch("https://api.sendpulse.com/events/name/abandoned_cart", {
+    
+    await fetch("https://events.sendpulse.com/events/name/abandoned_shopping_cart_1", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -53,10 +54,10 @@ app.post("/cart-abandoned", async (req, res) => {
       },
       body: JSON.stringify({
         email: email,
-        variables: { cart_url },
+        cart_url: cart_url ,
       }),
     });
-
+    
     res.json({ success: true });
   } catch (e) {
     console.error("Error sending event:", e);
