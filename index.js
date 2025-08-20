@@ -5,6 +5,13 @@ import fetch from "node-fetch";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Разрешаем только твой домен Хорошопа
+app.use(cors({
+  origin: "http://shop526862.horoshop.ua/", // поменяй на свой домен
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(bodyParser.json());
 
 // SendPulse credentials
@@ -22,8 +29,8 @@ async function getToken() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       grant_type: "client_credentials",
-      client_id: "2f20735d0a318d01f312cf46fab6a1a2",
-      client_secret: "a9e48263667d3662bb5bde9af83bf10b",
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
     }),
   });
 
